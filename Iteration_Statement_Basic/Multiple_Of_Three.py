@@ -1,0 +1,16 @@
+'''A school is organizing a quiz competition. Only students whose roll numbers are divisible by 3 are selected for the first round. The teacher enters a roll number range and wants the system to display eligible roll numbers.
+Write a program to display numbers divisible by 3 between two given numbers using loops'''
+
+n1 = int(input("Enter first number : "))
+n2 = int(input("Enter second number : "))
+
+if n1 < n2 :
+	while n1<=n2 :
+		if n1%3 == 0:
+			print(n1,end=" ")
+		n1 = n1 + 1
+else :
+	while n1>=n2 :
+		if n1%3 == 0:
+			print(n1,end=" ")
+		n1 = n1 - 1
