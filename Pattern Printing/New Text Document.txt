@@ -1,0 +1,8 @@
+n1 = int(input("Enter First Number : "))
+n2 = int(input("Enter Second Number : "))
+
+k = n1
+while n1 > n2 :
+	if n1%4 == 0:
+		print(n1)
+	k+=1
