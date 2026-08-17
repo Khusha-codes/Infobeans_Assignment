@@ -11,15 +11,19 @@ to the number - If alphabet is uppercase convert expanded characters
 into lowercase - Ignore special symbols - Display expanded string -
 Display total character count'''
 
-msg = intput("Enter compressed message: ")
+msg = input("Enter compressed message: ").lower()
 
 alpha = ""
 num = 0
+total = 0
 
 for ch in msg :
-	if ch.isaphla() :
+	if ch.isalpha() :
 		alpha = ch
 	elif ch.isdigit() :
 		num = int(ch)
 		print(alpha*num , end = "")
+	total += 1
+
 print()
+print("Total Characters:",total)

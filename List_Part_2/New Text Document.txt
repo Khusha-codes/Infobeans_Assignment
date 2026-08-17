@@ -1,0 +1,54 @@
+'''Smart City Traffic Peak Load Analyzer
+
+Problem Statement
+
+A smart city monitors traffic density at different time intervals in a day.
+
+An element is called a peak traffic point if it is greater than or equal to its adjacent elements.
+
+You are given an array traffic[] of size N.
+
+Tasks:
+
+Find all peak elements
+Calculate the sum of all peak traffic values
+Find the product of all peak traffic values
+Return the maximum peak value
+
+Note:
+If only one element exists, it is the only peak.'''
+
+arr = []
+p = []
+sum = 0
+pro = 1
+n = int(input("Enter size: "))
+
+for i in range(n):
+	c = int(input("Enter traffic density: "))
+	arr.append(c)
+
+for i in range(n):
+	if i == 0 :
+		if n==1 or arr[i] >= arr[i+1]:
+			p.append[i]
+			sum+=i
+			pro = pro*i
+	elif i == n-1 :
+		if arr[i] >= arr[i-1]:
+			p.append[i]
+			sum+=i
+			pro = pro*i
+	else:
+		if arr[i]>=arr[i-1] and arr[i]>=arr[i+1]:
+			p.append[i]
+			sum+=i
+			pro = pro*i
+if p :
+	print("Peak traffic density:",p)
+	print("Sum of traffic density:",sum)
+	print("Sum of traffic density:",pro)
+	s = sorted(p)
+	print("Maximum peak traffic density:",s[-1])
+else:
+	print("Peak not found")

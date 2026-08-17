@@ -1,0 +1,19 @@
+a = []
+# name , class , roll no , subject , marks
+for i in range(5):
+	match i :
+		case 0 :
+			n = input("Enter name: ")
+			a.append(n)
+		case 1 :
+			n = int("Enter class: ")
+			a.append(n)
+		case 2 :
+			n = int("Enter roll no.: ")
+			a.append(n)
+		case 3 :
+			n = input("Enter subject: ")
+			a.append(n)
+		case 4 :
+			n = float(input("Enter marks: "))
+			a.append(n)	

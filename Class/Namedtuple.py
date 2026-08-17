@@ -1,0 +1,15 @@
+from collections import namedtuple
+student = namedtuple("St",["rollno","name","marks"])
+
+n = int(input("Enter number of student: "))
+students = []
+
+for i in range(n) :
+	print("Enter details")
+	r = int(input("Enter rollno: "))
+	name = input("Enter name: ")
+	m = int(input("Enter marks: "))
+	students.append(student(r,name,m))
+
+for x in students :
+	print(x.marks)
