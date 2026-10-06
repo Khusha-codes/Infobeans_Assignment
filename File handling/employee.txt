@@ -1,0 +1,4 @@
+101 Ajay IT 65000
+102 Ravi HR 45000
+103 Priya IT 72000
+104 Amit Sales 48000

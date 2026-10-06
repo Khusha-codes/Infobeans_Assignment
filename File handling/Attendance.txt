@@ -1,0 +1,10 @@
+101  Rahul  present
+102  kirti  present
+103  khushi  absent
+104  chhavi  present
+105  rohit  present
+101  Rahul  Present
+102  Priya  Absent
+103  Amit  Present
+104  Neha  Present
+105  Rohit  Absent

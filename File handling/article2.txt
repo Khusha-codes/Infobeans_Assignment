@@ -1,0 +1,4 @@
+Python is simple.
+Python is powerful.
+Many developers use Python.
+Python is popular.
