@@ -1,0 +1,487 @@
+mysql> create database sunday;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use sunday;
+Database changed
+mysql> create table Employee(
+    -> employee_ID int primary key auto_increment,
+    -> employee_Name varchar(20),
+    -> Department enum("IT","HR","Finance","Sales"),
+    -> City Enum("Indore","Bhopal","Pune","Mumbai","Bangalore"),
+    -> Salary tinyint unsigned,
+    -> Experience tinyint unsigned,
+    -> Age tinyint unsigned,
+    -> Joining_Date Date,
+    -> Sample_Date timestamp default current_timestamp);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> alter table employee
+    -> modify column Salary
+    -> int unsigned;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into employee(employee_name, Department, city, salary, experience, age, joining_date)
+    -> values("Kirti", "IT" , "Indore", 80000, 1, 27, "2022-11-20");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee(employee_name, Department, city, salary, experience, age, joining_date)
+    -> values("Tannu", "HR" , "Indore", 100000, 5, 28, "2021-10-22"),
+    -> ("Khushboo", "Finance" , "Bhopal", 80000, 3, 31, "2024-11-20"),
+    -> ("Viruchi", "Sales" , "Bhopal", 90000, 7, 38, "2020-01-28"),
+    -> ("Gouri", "HR" , "Pune", 70000, 4, 35, "2019-08-18"),
+    -> ("Chhavi", "Finance" , "Mumbai", 75000, 4, 35, "2019-08-18"),
+    -> ("Shreya", "Sales" , "Mumbai", 75000, 10, 39, "2020-04-10"),
+    -> ("Krati", "Sales" , "Indore", 85000, 10, 40, "2023-06-15"),
+    -> ("Khushi", "IT" , "Bangalore", 100000, 2, 24, "2026-05-25"),
+    -> ("Pratibha", "HR" , "Bangalore", 50000, 5, 34, "2021-05-05");
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+10 rows in set (0.00 sec)
+       select * from employee
+    -> where salary > 60000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+9 rows in set (0.01 sec)
+
+mysql> select * from employee
+    -> where salary <= 50000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee
+    -> where age > 30;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> experience >= 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>= 5' at line 2
+mysql> select * from employee
+    -> where experience >= 5;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department in("IT","Finance");
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from employee
+    -> where department in("IT","HR","Sales");
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department not in("IT","HR");
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           3 | Khushboo      | Finance    | Bhopal |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city = "Indore" or city = "Pune";
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune   |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city not in("Indore","Bhopal","Mumbai");
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where Salary between 40000 and 70000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where age between 25 and 35;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where experience between 3 and 7;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date between 2022 and 2025;
+Empty set, 2 warnings (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date between "2022" and "2025";
+Empty set, 20 warnings (0.00 sec)
+
+mysql> where joining_date between "2022-01-01" and "2025-12-31";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where joining_date between "2022-01-01" and "2025-12-31"' at line 1
+mysql> select * from employee
+    -> where joining_date between "2022-01-01" and "2025-12-31";
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           3 | Khushboo      | Finance    | Bhopal |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date < "2023-01-01";
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city = "Indore" and department = "IT";
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee
+    -> where salary > 70000 and department = "IT";
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where salary between 50000 and 90000 and exprience > 4;
+ERROR 1054 (42S22): Unknown column 'exprience' in 'where clause'
+mysql> select * from employee
+    -> where salary between 50000 and 90000 and experience > 4;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department in("IT","Finance")
+    -> and salary > 60000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date between "2021-01-01" and "2024-12-31"
+    -> and salary > 50000;
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where salary not between 50000 and 90000
+    -> and;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> select * from employee
+    -> where salary not between 40000 and 70000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department not in("IT","HR","Sales")
+    -> ;
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           3 | Khushboo      | Finance    | Bhopal |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department in("IT","hr","Sales");
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore    |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date not between "2022-01-01" and "2025-12-31"
+    -> ;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           4 | Viruchi       | Sales      | Bhopal    |  90000 |          7 |   38 | 2020-01-28   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           7 | Shreya        | Sales      | Mumbai    |  75000 |         10 |   39 | 2020-04-10   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city in("Indore","Pune")
+    -> and salary between 45000 and 80000
+    -> and experience > 3;
++-------------+---------------+------------+------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+------+--------+------------+------+--------------+---------------------+
+|           5 | Gouri         | HR         | Pune |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+------+--------+------------+------+--------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee
+    -> where joining_date not between "2020-01-01" and "2023-12-31"
+    -> and salary > 60000;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           6 | Chhavi        | Finance    | Mumbai    |  75000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city in("Indore","Pune","Bangalore"),
+    -> and salary between 50000 and 90000
+    -> and experience >= 4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+and salary between 50000 and 90000
+and experience >= 4' at line 2
+mysql> select * from employee
+    -> where city in("Indore","Pune","Bangalore")
+    -> and salary between 50000 and 90000
+    -> and experience >= 4;
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           5 | Gouri         | HR         | Pune      |  70000 |          4 |   35 | 2019-08-18   | 2026-10-18 18:19:51 |
+|           8 | Krati         | Sales      | Indore    |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
+|          10 | Pratibha      | HR         | Bangalore |  50000 |          5 |   34 | 2021-05-05   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city in("Indore","Pune","Bangalore")
+    -> and department <> "HR"
+    -> and joining_date between "2021-01-01" and "2025-12-31"
+    -> ;
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           8 | Krati         | Sales      | Indore |  85000 |         10 |   40 | 2023-06-15   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where department in("IT","Finance")
+    -> and salary > 60000
+    -> and age between 25 and 35
+    -> and joining_date > "2022-01-01";
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
+|           3 | Khushboo      | Finance    | Bhopal |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> salary not between 40000 and 75000
+    -> and experence between 2 and 8
+    -> and department <> "sales";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not between 40000 and 75000
+and experence between 2 and 8
+and department <> "sal' at line 2
+mysql> select * from employee
+    -> where salary not between 40000 and 75000
+    -> and experence between 2 and 8
+    -> and department <> "sales";
+ERROR 1054 (42S22): Unknown column 'experence' in 'where clause'
+mysql> select * from employee
+    -> where salary not between 40000 and 75000
+    -> and experience between 2 and 8
+    -> and department <> "sales";
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City      | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+|           2 | Tannu         | HR         | Indore    | 100000 |          5 |   28 | 2021-10-22   | 2026-10-18 18:19:51 |
+|           3 | Khushboo      | Finance    | Bhopal    |  80000 |          3 |   31 | 2024-11-20   | 2026-10-18 18:19:51 |
+|           9 | Khushi        | IT         | Bangalore | 100000 |          2 |   24 | 2026-05-25   | 2026-10-18 18:19:51 |
++-------------+---------------+------------+-----------+--------+------------+------+--------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee
+    -> where city in("Indore","Pune")
+    -> and department in("IT","Finance","hr")
+    -> where salary between 45000 and 85000
+    -> and joining_date between "2020-01-01" and "2024-12-31";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary between 45000 and 85000
+and joining_date between "2020-01-01" and "' at line 4
+mysql> select * from employee
+    -> where city in("Indore","Pune")
+    -> and department in("IT","Finance","hr")
+    -> and salary between 45000 and 85000
+    -> and joining_date between "2020-01-01" and "2024-12-31";
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+| employee_ID | employee_Name | Department | City   | Salary | Experience | Age  | Joining_Date | Sample_Date         |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+|           1 | Kirti         | IT         | Indore |  80000 |          1 |   27 | 2022-11-20   | 2026-10-18 18:01:01 |
++-------------+---------------+------------+--------+--------+------------+------+--------------+---------------------+
+1 row in set (0.00 sec)

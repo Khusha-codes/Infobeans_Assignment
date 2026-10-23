@@ -1,0 +1,42 @@
+'''QNO  1: Create and Populate students Table
+Columns:
+
+id INT
+
+name VARCHAR(100)
+
+age INT
+
+gender VARCHAR(10)
+
+address VARCHAR(150)
+
+phone VARCHAR(15)
+
+email VARCHAR(100)
+
+Task:
+
+Insert 5 different student records with dummy data.'''
+
+
+mysql> create table students(
+    -> id int primary key auto_increment,
+    -> name varchar(100),
+    -> age int,
+    -> gender enum("Female","male"),
+    -> address varchar(150),
+    -> phone char(10),
+    -> email varchar(100));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into students(name,age,gender,address,phone,email)
+    -> values("Tannu",17,"Female","Indore","1234567890","tannu@gmail.com"),
+    -> ("Viruchi",15,"Male","Mandsaur","2345678901","viruchi@gmail.com"),
+    -> ("Khushboo",12,"Male","Mandsaur","3456789012","khushboo@gmail.com"),
+    -> ("Viruchi",15,"Male","Mandsaur","2345678901","viruchi@gmail.com"),
+    -> ("Chhavi",13,"Female","Dharampuri","4567890123","chhavi@gmail.com"),
+    -> ("Kirti",14,"Male","Indore","5678901234","kirti@gmail.com");
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+

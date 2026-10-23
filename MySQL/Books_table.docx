@@ -1,0 +1,37 @@
+'''QNO  2: Create and Populate books Table
+Columns:
+
+book_id INT
+
+title VARCHAR(150)
+
+author VARCHAR(100)
+
+genre VARCHAR(50)
+
+publication_year INT
+
+price DECIMAL(6,2)
+
+publisher VARCHAR(100)
+
+Task:
+
+Insert 4 book records.'''
+
+mysql> create table books(id int primary key auto_increment,
+    -> title varchar(150),
+    -> author varchar(100),
+    -> genre varchar(50),
+    -> pablication_year char(4),
+    -> price decimal(6,2),
+    -> publisher varchar(100));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into books(title,author,genre,pablication_year,price,publisher)
+    -> values("Don","Viruchi","Action","2005",1234.56,"Tannu"),
+    -> ("Ghayal Gandhi ji","Tannu","Comedy","2005",2345.67,"Khushboo"),
+    -> ("Pappu","Khushboo","Self-Help","2007",3456.78,"Kunnu"),
+    -> ("Mathematics","Kunnu","Non-fiction","2006",4567.89,"Khushi");
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0

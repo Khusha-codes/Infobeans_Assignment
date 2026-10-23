@@ -1,0 +1,271 @@
+mysql> insert into product(P_name,category,Brand,City,Price,Stock,Rating,Manufacturing)
+    -> values("Phone","Electronics","Samsung","Bhopal",35000,40,5,"2025-12-05");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(P_name,category,Brand,City,Price,Stock,Rating,Manufacturing)
+    -> values("Suger","Grocery","Madhur","Pune",800,30,4,"2023-01-25"),
+    -> ("CropTop","Clothing","Zara","Delhi",300,75,3,"2020-08-17"),
+    -> ("Table","Furniture","Wood","Mumbai",15000,20,4,"2019-06-29"),
+    -> ("Door","Furniture","Wood","Pune",12000,10,4,"2021-08-05"),
+    -> ("Dal","Grocery","Gold","Indore",300,60,4,"2026-01-28"),
+    -> ("T-shirt","Clothing","Zara","Mumbai",800,90,5,"2025-11-09");
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+mysql> select * from product;
++----+---------+-------------+---------+--------+-------+-------+--------+---------------+---------------------+
+| ID | P_Name  | Category    | Brand   | City   | Price | Stock | Rating | Manufacturing | Requirements        |
++----+---------+-------------+---------+--------+-------+-------+--------+---------------+---------------------+
+|  1 | Laptop  | Electronics | Hp      | Indore | 40000 |    37 | 4      | 2024-11-03    | 2026-10-21 13:56:37 |
+|  2 | Phone   | Electronics | Samsung | Bhopal | 35000 |    40 | 5      | 2025-12-05    | 2026-10-21 16:03:12 |
+|  3 | Suger   | Grocery     | Madhur  | Pune   |   800 |    30 | 4      | 2023-01-25    | 2026-10-21 16:53:07 |
+|  4 | CropTop | Clothing    | Zara    | Delhi  |   300 |    75 | 3      | 2020-08-17    | 2026-10-21 16:53:07 |
+|  5 | Table   | Furniture   | Wood    | Mumbai | 15000 |    20 | 4      | 2019-06-29    | 2026-10-21 16:53:07 |
+|  6 | Door    | Furniture   | Wood    | Pune   | 12000 |    10 | 4      | 2021-08-05    | 2026-10-21 16:53:07 |
+|  7 | Dal     | Grocery     | Gold    | Indore |   300 |    60 | 4      | 2026-01-28    | 2026-10-21 16:53:07 |
+|  8 | T-shirt | Clothing    | Zara    | Mumbai |   800 |    90 | 5      | 2025-11-09    | 2026-10-21 16:53:07 |
++----+---------+-------------+---------+--------+-------+-------+--------+---------------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where price > 30000 and rating >= 4;
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
++--------+
+2 rows in set (0.01 sec)
+
+mysql> select stock from product
+    -> ;
++-------+
+| stock |
++-------+
+|    37 |
+|    40 |
+|    30 |
+|    75 |
+|    20 |
+|    10 |
+|    60 |
+|    90 |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where (stock < 20 or price > 75000) and category<>Grocery;
+ERROR 1054 (42S22): Unknown column 'Grocery' in 'where clause'
+mysql> select p_name from product
+    -> where (stock < 20 or price > 75000) and category<>"Grocery";
++--------+
+| p_name |
++--------+
+| Door   |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where price between 15000 and 60000
+    -> and rating between 3 and 5 and
+    -> manufacturing > "2022-12-31";
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
++--------+
+2 rows in set (0.02 sec)
+
+mysql> select p_name from product
+    -> where city in("Indore","Pune","Delhi") and
+    -> pice > 20000 and
+    -> stock <> 0;
+ERROR 1054 (42S22): Unknown column 'pice' in 'where clause'
+mysql> select p_name from product
+    -> where city in("Indore","Pune","Delhi") and
+    -> price > 20000 and
+    -> stock <> 0;
++--------+
+| p_name |
++--------+
+| Laptop |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where category in("Electronics","Furniture");
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
+| Table  |
+| Door   |
++--------+
+4 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where category in("Electronics","Clothing","Grocery");
++---------+
+| p_name  |
++---------+
+| Laptop  |
+| Phone   |
+| Suger   |
+| CropTop |
+| Dal     |
+| T-shirt |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where city not in("indore","Bhopal")
+    -> ;
++---------+
+| p_name  |
++---------+
+| Suger   |
+| CropTop |
+| Table   |
+| Door    |
+| T-shirt |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> brand not in("Samsung","LG","Sony");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not in("Samsung","LG","Sony")' at line 2
+mysql> select p_name from product
+    -> where brand not in("Samsung","LG","Sony");
++---------+
+| p_name  |
++---------+
+| Laptop  |
+| Suger   |
+| CropTop |
+| Table   |
+| Door    |
+| Dal     |
+| T-shirt |
++---------+
+7 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where price between 10000 and 50000;
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
+| Table  |
+| Door   |
++--------+
+4 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where stock between 20 and 60;
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
+| Suger  |
+| Table  |
+| Dal    |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where rating between 3 and 5;
++---------+
+| p_name  |
++---------+
+| Laptop  |
+| Phone   |
+| Suger   |
+| CropTop |
+| Table   |
+| Door    |
+| Dal     |
+| T-shirt |
++---------+
+8 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where rating between 3 and 5
+    -> and price > 20000;
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where manufacturing between "2023-01-01" and "2025-12-31";
++---------+
+| p_name  |
++---------+
+| Laptop  |
+| Phone   |
+| Suger   |
+| T-shirt |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where manufacturing between "2023-01-01" and "2025-12-31";
++---------+
+| p_name  |
++---------+
+| Laptop  |
+| Phone   |
+| Suger   |
+| T-shirt |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where manufacturing between "2023-01-01" and "2025-12-31" and
+    -> category in("Electronics","Furniture");
++--------+
+| p_name |
++--------+
+| Laptop |
+| Phone  |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where p_name like "S%";
++--------+
+| p_name |
++--------+
+| Suger  |
++--------+
+1 row in set (0.01 sec)
+
+mysql> select p_name from product
+    -> where p_name like "%phone%";
++--------+
+| p_name |
++--------+
+| Phone  |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select p_name from product
+    -> where p_name like "%a";
+Empty set (0.00 sec)
+
+mysql> select p_name from product
+    -> where city in("Indore","Pune") and
+    -> price between 20000 and 70000 and
+    -> rating >= 4;
++--------+
+| p_name |
++--------+
+| Laptop |
++--------+
+1 row in set (0.00 sec)
